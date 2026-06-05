@@ -247,11 +247,13 @@
       margin-top: 0;
     }
 
-    .real-task-panel {
+    .real-task-panel,
+    .sim-task-panel {
       display: none;
     }
 
-    .real-task-panel.is-active {
+    .real-task-panel.is-active,
+    .sim-task-panel.is-active {
       display: block;
     }
 
@@ -672,60 +674,60 @@
         Browse successful GeoAdapt rollouts and failure rollouts from GeoAdapt, GeoAdapt w/o AGOS, and GeoAdapt-Automate for each unseen simulation task.
       </p>
 
-      <nav class="demo-nav" aria-label="Simulation rollout navigation">
-        <a href="#task-1">Task 1</a>
-        <a href="#task-2">Task 2</a>
-        <a href="#task-3">Task 3</a>
-        <a href="#task-4">Task 4</a>
-        <a href="#task-5">Task 5</a>
-        <a href="#task-6">Task 6</a>
-        <a href="#task-7">Task 7</a>
-        <a href="#task-8">Task 8</a>
+      <nav class="demo-nav" data-sim-task-selector role="tablist" aria-label="Simulation rollout navigation">
+        <button class="result-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="task-1">Task 1</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="task-2">Task 2</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="task-3">Task 3</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="task-4">Task 4</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="task-5">Task 5</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="task-6">Task 6</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="task-7">Task 7</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="task-8">Task 8</button>
       </nav>
 
-      <article class="task-demo" id="task-1" data-task-name="Task 1">
+      <article class="task-demo sim-task-panel is-active" id="task-1" data-task-name="Task 1" role="tabpanel">
         <div class="task-demo-header"><h3>Task 1</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_1/successful/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 1 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_1/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_1/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_1/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_1/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
       </article>
 
-      <article class="task-demo" id="task-2" data-task-name="Task 2">
+      <article class="task-demo sim-task-panel" id="task-2" data-task-name="Task 2" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 2</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_2/successful/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_2/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_2/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_2/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
       </article>
 
-      <article class="task-demo" id="task-3" data-task-name="Task 3">
+      <article class="task-demo sim-task-panel" id="task-3" data-task-name="Task 3" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 3</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_3/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-sources="GeoAdapt=resources/video/sim/task_3/failure/geoadapt/failure_1.mp4,resources/video/sim/task_3/failure/geoadapt/failure2.mp4" data-video-templates="GeoAdapt w/o AGOS=resources/video/sim/task_3/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_3/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_3/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
       </article>
 
-      <article class="task-demo" id="task-4" data-task-name="Task 4">
+      <article class="task-demo sim-task-panel" id="task-4" data-task-name="Task 4" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 4</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_4/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 4 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_4/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_4/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_4/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_4/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 4 failure rollout videos"></div></div>
       </article>
 
-      <article class="task-demo" id="task-5" data-task-name="Task 5">
+      <article class="task-demo sim-task-panel" id="task-5" data-task-name="Task 5" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 5</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_5/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 5 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_5/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_5/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_5/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_5/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
       </article>
 
-      <article class="task-demo" id="task-6" data-task-name="Task 6">
+      <article class="task-demo sim-task-panel" id="task-6" data-task-name="Task 6" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 6</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_6/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 6 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_6/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_6/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_6/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_6/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 6 failure rollout videos"></div></div>
       </article>
 
-      <article class="task-demo" id="task-7" data-task-name="Task 7">
+      <article class="task-demo sim-task-panel" id="task-7" data-task-name="Task 7" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 7</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_7/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 7 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_7/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_7/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_7/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_7/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 7 failure rollout videos"></div></div>
       </article>
 
-      <article class="task-demo" id="task-8" data-task-name="Task 8">
+      <article class="task-demo sim-task-panel" id="task-8" data-task-name="Task 8" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 8</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_8/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 8 successful rollout videos"></div></div>
         <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_8/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_8/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_8/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_8/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 8 failure rollout videos"></div></div>
@@ -796,7 +798,7 @@
       showResult(activeIndex);
     });
 
-    document.querySelectorAll("[data-real-task-selector]").forEach((taskSelector) => {
+    document.querySelectorAll("[data-real-task-selector], [data-sim-task-selector]").forEach((taskSelector) => {
       const buttons = Array.from(taskSelector.querySelectorAll("button"));
       const panels = buttons.map((button) => document.getElementById(button.getAttribute("aria-controls")));
 
