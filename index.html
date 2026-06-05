@@ -680,14 +680,14 @@
 
       <article class="task-demo" id="task-2" data-task-name="Task 2">
         <div class="task-demo-header"><h3>Task 2</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_2/successful/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_2/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_2/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-3" data-task-name="Task 3">
         <div class="task-demo-header"><h3>Task 3</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_3/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2" data-video-sources="GeoAdapt=resources/video/sim/task_3/failure/geoadapt/failure_1.mp4,resources/video/sim/task_3/failure/geoadapt/failure2.mp4" data-video-templates="GeoAdapt w/o AGOS=resources/video/sim/task_3/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_3/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-4" data-task-name="Task 4">
@@ -831,6 +831,15 @@
             return [entry.slice(0, separatorIndex), entry.slice(separatorIndex + 1)];
           })
       );
+      const videoSources = new Map(
+        (rolloutGroup.dataset.videoSources || "")
+          .split("|")
+          .filter(Boolean)
+          .map((entry) => {
+            const separatorIndex = entry.indexOf("=");
+            return [entry.slice(0, separatorIndex), entry.slice(separatorIndex + 1).split(",")];
+          })
+      );
       const playbackRate = Number(rolloutGroup.dataset.playbackRate || rolloutGroup.closest("[data-playback-rate]")?.dataset.playbackRate) || 1;
       const strip = rolloutGroup.querySelector(".demo-strip");
 
@@ -838,6 +847,7 @@
         strip.replaceChildren();
         strip.scrollLeft = 0;
         const activeTemplate = videoTemplates.get(model) || videoTemplate;
+        const activeSources = videoSources.get(model);
 
         for (let index = 1; index <= count; index += 1) {
           const card = document.createElement("div");
@@ -855,7 +865,7 @@
           video.addEventListener("loadedmetadata", () => {
             video.playbackRate = playbackRate;
           });
-          source.src = activeTemplate ? activeTemplate.replace("{index}", String(index)) : videoSrc;
+          source.src = activeSources?.[index - 1] || (activeTemplate ? activeTemplate.replace("{index}", String(index)) : videoSrc);
           source.type = "video/mp4";
           caption.textContent = `${taskName} - ${outcome} - ${model} - Rollout ${index}`;
 
