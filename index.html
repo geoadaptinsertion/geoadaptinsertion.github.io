@@ -567,6 +567,17 @@
       </div>
     </section>
 
+    <section id="architecture">
+      <h2>Model Architecture</h2>
+      <p class="lead">
+        GeoAdapt conditions a diffusion policy on wrist depth, aligned plug-socket geometry, and force feedback. Visual encoders extract task-relevant contact and alignment cues, which are fused with force observations to predict corrective insertion actions.
+      </p>
+      <div class="figure">
+        <img src="resources/image/architecture.png" alt="GeoAdapt model architecture">
+        <p class="caption">GeoAdapt model architecture. Wrist observations, AGOS geometry, and end-effector force are encoded and fused to guide diffusion-based insertion control.</p>
+      </div>
+    </section>
+
     <section id="experiments">
       <h2>Experiments</h2>
       <p class="lead">
