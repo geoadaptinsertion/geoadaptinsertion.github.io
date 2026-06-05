@@ -239,13 +239,6 @@
       color: #ffffff;
     }
 
-    .result-carousel {
-      display: grid;
-      grid-template-columns: 46px minmax(0, 1fr) 46px;
-      align-items: center;
-      gap: 12px;
-    }
-
     .result-stage {
       min-width: 0;
     }
@@ -417,56 +410,9 @@
       display: none;
     }
 
-    .demo-carousel {
-      display: grid;
-      grid-template-columns: 46px minmax(0, 1fr) 46px;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .demo-arrow {
-      position: relative;
-      width: 46px;
-      height: 46px;
-      border: 1px solid #cbd5df;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 8px 22px rgba(31, 41, 51, 0.12);
-      cursor: pointer;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-    }
-
-    .demo-arrow::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 12px;
-      height: 12px;
-      border-top: 3px solid var(--accent-dark);
-      border-right: 3px solid var(--accent-dark);
-      transform-origin: center;
-    }
-
-    .demo-arrow.previous::before {
-      transform: translate(-38%, -50%) rotate(-135deg);
-    }
-
-    .demo-arrow.next::before {
-      transform: translate(-62%, -50%) rotate(45deg);
-    }
-
-    .demo-arrow:hover {
-      border-color: var(--accent);
-      box-shadow: 0 10px 26px rgba(19, 103, 167, 0.18);
-      transform: translateY(-1px);
-    }
-
-    .demo-arrow:disabled {
-      opacity: 0.35;
-      cursor: default;
-      box-shadow: none;
-      transform: none;
+    #task-demos .demo-strip,
+    .rollout-group[data-outcome="Failure"] .demo-strip {
+      justify-content: center;
     }
 
     .demo-card {
@@ -532,27 +478,6 @@
       .task-demo-header {
         align-items: flex-start;
         flex-direction: column;
-      }
-
-      .demo-carousel {
-        grid-template-columns: 38px minmax(0, 1fr) 38px;
-        gap: 8px;
-      }
-
-      .result-carousel {
-        grid-template-columns: 38px minmax(0, 1fr) 38px;
-        gap: 8px;
-      }
-
-      .demo-arrow {
-        width: 38px;
-        height: 38px;
-      }
-
-      .demo-arrow::before {
-        width: 10px;
-        height: 10px;
-        border-width: 2px;
       }
 
       .figure {
@@ -671,22 +596,20 @@
         </div>
 
         <div class="result-carousel">
-          <button class="demo-arrow previous" type="button" aria-label="Previous result table"></button>
           <div class="result-stage" id="result-stage" role="tabpanel" aria-live="polite" aria-labelledby="result-tab-adaptation">
             <div class="figure narrow">
               <img class="result-image" src="resources/image/adaptation_sim_results.png" alt="Few-shot adaptation success rates on unseen simulation geometries">
               <p class="caption result-caption">Simulation Results 1: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate.</p>
             </div>
           </div>
-          <button class="demo-arrow next" type="button" aria-label="Next result table"></button>
         </div>
       </div>
     </section>
 
-    <section id="real-world-videos">
+    <section id="real-world-videos" data-playback-rate="2">
       <h2>Real-world Experiment Videos</h2>
       <p class="lead">
-        Browse successful GeoAdapt rollouts and failure rollouts from GeoAdapt, GeoAdapt w/o AGOS, and GeoAdapt-Automate for each real-world task.
+        Browse successful GeoAdapt rollouts and failure rollouts from GeoAdapt, GeoAdapt w/o AGOS, and GeoAdapt-Automate for each real-world task. Real-world videos are played at 2x speed.
       </p>
 
       <nav class="demo-nav" data-real-task-selector role="tablist" aria-label="Real-world experiment navigation">
@@ -697,11 +620,11 @@
 
       <article class="task-demo real-task-panel is-active" id="real-task-1" data-task-name="Real-world Task 1" role="tabpanel">
         <div class="task-demo-header"><h3>Real-world Task 1</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3">
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3" data-video-template="resources/video/real_world/task_1/successful/geoadapt/geoadapt_task1_{index}.mp4">
           <h4>Successful Rollouts</h4>
           <div class="demo-strip" aria-label="Real-world Task 1 successful rollout videos"></div>
         </div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3">
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/real_world/task_1/failure/geoadapt/geoadapt_task1_{index}.mp4|GeoAdapt w/o AGOS=resources/video/real_world/task_1/failure/geoadapt_wo_agos/no_agos_task1_{index}.mp4|GeoAdapt-Automate=resources/video/real_world/task_1/failure/geoadapt_automate/automate_task1_{index}.mp4">
           <h4>Failure Rollouts</h4>
           <div class="demo-strip" aria-label="Real-world Task 1 failure rollout videos"></div>
         </div>
@@ -709,11 +632,11 @@
 
       <article class="task-demo real-task-panel" id="real-task-2" data-task-name="Real-world Task 2" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Real-world Task 2</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3">
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3" data-video-template="resources/video/real_world/task_2/successful/geoadapt/geoadapt_task2_{index}.mp4">
           <h4>Successful Rollouts</h4>
           <div class="demo-strip" aria-label="Real-world Task 2 successful rollout videos"></div>
         </div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3">
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/real_world/task_2/failure/geoadapt/geoadapt_task2_{index}.mp4|GeoAdapt w/o AGOS=resources/video/real_world/task_2/failure/geoadapt_wo_agos/no_agos_task2_{index}.mp4|GeoAdapt-Automate=resources/video/real_world/task_2/failure/geoadapt_automate/automate_task2_{index}.mp4">
           <h4>Failure Rollouts</h4>
           <div class="demo-strip" aria-label="Real-world Task 2 failure rollout videos"></div>
         </div>
@@ -721,11 +644,11 @@
 
       <article class="task-demo real-task-panel" id="real-task-3" data-task-name="Real-world Task 3" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Real-world Task 3</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3">
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3" data-video-template="resources/video/real_world/task_3/successful/geoadapt/geoadapt_task3_{index}.mp4">
           <h4>Successful Rollouts</h4>
           <div class="demo-strip" aria-label="Real-world Task 3 successful rollout videos"></div>
         </div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3">
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/real_world/task_3/failure/geoadapt/geoadapt_task3_{index}.mp4|GeoAdapt w/o AGOS=resources/video/real_world/task_3/failure/geoadapt_wo_agos/no_agos_task3_{index}.mp4|GeoAdapt-Automate=resources/video/real_world/task_3/failure/geoadapt_automate/automate_task3_{index}.mp4">
           <h4>Failure Rollouts</h4>
           <div class="demo-strip" aria-label="Real-world Task 3 failure rollout videos"></div>
         </div>
@@ -751,50 +674,50 @@
 
       <article class="task-demo" id="task-1" data-task-name="Task 1">
         <div class="task-demo-header"><h3>Task 1</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 1 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 1 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-2" data-task-name="Task 2">
         <div class="task-demo-header"><h3>Task 2</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-3" data-task-name="Task 3">
         <div class="task-demo-header"><h3>Task 3</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-4" data-task-name="Task 4">
         <div class="task-demo-header"><h3>Task 4</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 4 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 4 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 4 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 4 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-5" data-task-name="Task 5">
         <div class="task-demo-header"><h3>Task 5</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 5 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 5 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-6" data-task-name="Task 6">
         <div class="task-demo-header"><h3>Task 6</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 6 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 6 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 6 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 6 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-7" data-task-name="Task 7">
         <div class="task-demo-header"><h3>Task 7</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 7 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 7 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 7 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 7 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo" id="task-8" data-task-name="Task 8">
         <div class="task-demo-header"><h3>Task 8</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 8 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 8 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 8 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="2"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 8 failure rollout videos"></div></div>
       </article>
     </section>
 
@@ -820,8 +743,6 @@
       const stage = resultCarousel.querySelector(".result-stage");
       const image = resultCarousel.querySelector(".result-image");
       const caption = resultCarousel.querySelector(".result-caption");
-      const previousButton = resultCarousel.querySelector(".demo-arrow.previous");
-      const nextButton = resultCarousel.querySelector(".demo-arrow.next");
       const results = [
         {
           src: "resources/image/adaptation_sim_results.png",
@@ -861,8 +782,6 @@
         tab.addEventListener("click", () => showResult(index));
       });
 
-      previousButton.addEventListener("click", () => showResult(activeIndex - 1));
-      nextButton.addEventListener("click", () => showResult(activeIndex + 1));
       showResult(activeIndex);
     });
 
@@ -902,14 +821,23 @@
       const models = rolloutGroup.dataset.models.split("|");
       const count = Number(rolloutGroup.dataset.count) || 1;
       const videoSrc = rolloutGroup.dataset.videoSrc || "resources/video/demo.mp4";
+      const videoTemplate = rolloutGroup.dataset.videoTemplate;
+      const videoTemplates = new Map(
+        (rolloutGroup.dataset.videoTemplates || "")
+          .split("|")
+          .filter(Boolean)
+          .map((entry) => {
+            const separatorIndex = entry.indexOf("=");
+            return [entry.slice(0, separatorIndex), entry.slice(separatorIndex + 1)];
+          })
+      );
+      const playbackRate = Number(rolloutGroup.dataset.playbackRate || rolloutGroup.closest("[data-playback-rate]")?.dataset.playbackRate) || 1;
       const strip = rolloutGroup.querySelector(".demo-strip");
-      const carousel = document.createElement("div");
-      const previousButton = document.createElement("button");
-      const nextButton = document.createElement("button");
 
       function renderRollouts(model) {
         strip.replaceChildren();
         strip.scrollLeft = 0;
+        const activeTemplate = videoTemplates.get(model) || videoTemplate;
 
         for (let index = 1; index <= count; index += 1) {
           const card = document.createElement("div");
@@ -922,7 +850,12 @@
           video.playsInline = true;
           video.controls = true;
           video.preload = "metadata";
-          source.src = videoSrc;
+          video.defaultPlaybackRate = playbackRate;
+          video.playbackRate = playbackRate;
+          video.addEventListener("loadedmetadata", () => {
+            video.playbackRate = playbackRate;
+          });
+          source.src = activeTemplate ? activeTemplate.replace("{index}", String(index)) : videoSrc;
           source.type = "video/mp4";
           caption.textContent = `${taskName} - ${outcome} - ${model} - Rollout ${index}`;
 
@@ -930,8 +863,6 @@
           card.append(video, caption);
           strip.append(card);
         }
-
-        requestAnimationFrame(updateButtons);
       }
 
       if (outcome === "Failure" && models.length > 1) {
@@ -969,43 +900,6 @@
         heading.after(tabs);
       }
 
-      carousel.className = "demo-carousel";
-      previousButton.className = "demo-arrow previous";
-      nextButton.className = "demo-arrow next";
-      previousButton.type = "button";
-      nextButton.type = "button";
-      previousButton.setAttribute("aria-label", `Previous ${taskName} ${outcome.toLowerCase()} rollout`);
-      nextButton.setAttribute("aria-label", `Next ${taskName} ${outcome.toLowerCase()} rollout`);
-
-      strip.before(carousel);
-      carousel.append(previousButton, strip, nextButton);
-
-      function cardStep() {
-        const firstCard = strip.querySelector(".demo-card");
-        if (!firstCard) {
-          return strip.clientWidth;
-        }
-
-        const stripStyles = window.getComputedStyle(strip);
-        const gap = parseFloat(stripStyles.columnGap) || 0;
-        return firstCard.getBoundingClientRect().width + gap;
-      }
-
-      function updateButtons() {
-        previousButton.disabled = strip.scrollLeft <= 1;
-        nextButton.disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 1;
-      }
-
-      previousButton.addEventListener("click", () => {
-        strip.scrollBy({ left: -cardStep(), behavior: "smooth" });
-      });
-
-      nextButton.addEventListener("click", () => {
-        strip.scrollBy({ left: cardStep(), behavior: "smooth" });
-      });
-
-      strip.addEventListener("scroll", updateButtons);
-      window.addEventListener("resize", updateButtons);
       renderRollouts(models[0]);
     });
   </script>
