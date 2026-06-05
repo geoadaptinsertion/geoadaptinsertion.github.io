@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <title>GeoAdapt: Few-shot Peg Insertion Adaptation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #52616b;
+      --line: #d8dee5;
+      --accent: #1367a7;
+      --accent-dark: #0d4f81;
+      --soft: #f5f8fb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #ffffff;
+      font-family: "Crimson Text", Georgia, serif;
+      font-size: 20px;
+      line-height: 1.52;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--accent-dark);
+      text-decoration: underline;
+    }
+
+    img,
+    video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .page {
+      width: min(1040px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 56px 0 28px;
+      text-align: center;
+    }
+
+    .title {
+      margin: 0 auto 18px;
+      max-width: 980px;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: clamp(34px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0 auto 22px;
+      max-width: 840px;
+      color: var(--muted);
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .authors,
+    .affiliation,
+    .note {
+      margin: 10px auto 0;
+      max-width: 900px;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      line-height: 1.4;
+    }
+
+    .authors {
+      font-size: 22px;
+    }
+
+    .affiliation,
+    .note {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 28px auto 0;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 18px;
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      color: var(--accent);
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .button:hover {
+      background: var(--accent);
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .release-note {
+      margin: 26px auto 0;
+      padding: 12px 16px;
+      border: 1px solid #f0d7a6;
+      border-radius: 6px;
+      background: #fff8e8;
+      color: #7a4b00;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 17px;
+      text-align: center;
+    }
+
+    section {
+      padding: 34px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 34px;
+      line-height: 1.15;
+      text-align: center;
+    }
+
+    h3 {
+      margin: 0 0 8px;
+      font-size: 23px;
+      line-height: 1.2;
+    }
+
+    h4 {
+      margin: 0 0 10px;
+      font-size: 19px;
+      line-height: 1.25;
+    }
+
+    p {
+      margin: 0 0 16px;
+    }
+
+    .abstract {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: justify;
+    }
+
+    .lead {
+      max-width: 900px;
+      margin: 0 auto 22px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .figure {
+      margin: 20px auto 8px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .figure img {
+      width: 100%;
+    }
+
+    .figure.narrow {
+      max-width: 860px;
+    }
+
+    .result-figures {
+      margin-top: 20px;
+    }
+
+    .result-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 0 auto 16px;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+    }
+
+    .result-tab {
+      min-height: 36px;
+      padding: 6px 13px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+    }
+
+    .result-tab:hover,
+    .result-tab.is-active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+    }
+
+    .result-carousel {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) 46px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .result-stage {
+      min-width: 0;
+    }
+
+    .result-stage .figure {
+      margin-top: 0;
+    }
+
+    .real-task-panel {
+      display: none;
+    }
+
+    .real-task-panel.is-active {
+      display: block;
+    }
+
+    .caption {
+      margin-top: 10px;
+      color: var(--muted);
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--soft);
+    }
+
+    .card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.42;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 20px 0;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+    }
+
+    .metric {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1;
+      color: var(--accent-dark);
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.3;
+    }
+
+    .video-wrap {
+      max-width: 760px;
+      margin: 20px auto 0;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #000000;
+    }
+
+    .demo-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 8px auto 24px;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+    }
+
+    .demo-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .demo-nav a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .task-demo {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .task-demo-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+    }
+
+    .task-demo-header h3 {
+      margin: 0;
+    }
+
+    .rollout-group {
+      margin-top: 16px;
+    }
+
+    .rollout-group + .rollout-group {
+      margin-top: 24px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .baseline-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 12px;
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+    }
+
+    .demo-strip {
+      display: grid;
+      grid-auto-columns: minmax(280px, 360px);
+      grid-auto-flow: column;
+      gap: 14px;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      padding: 4px 2px 12px;
+      scroll-snap-type: inline mandatory;
+      scrollbar-width: none;
+    }
+
+    .demo-strip::-webkit-scrollbar {
+      display: none;
+    }
+
+    .demo-carousel {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) 46px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .demo-arrow {
+      position: relative;
+      width: 46px;
+      height: 46px;
+      border: 1px solid #cbd5df;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 8px 22px rgba(31, 41, 51, 0.12);
+      cursor: pointer;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+    }
+
+    .demo-arrow::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 12px;
+      border-top: 3px solid var(--accent-dark);
+      border-right: 3px solid var(--accent-dark);
+      transform-origin: center;
+    }
+
+    .demo-arrow.previous::before {
+      transform: translate(-38%, -50%) rotate(-135deg);
+    }
+
+    .demo-arrow.next::before {
+      transform: translate(-62%, -50%) rotate(45deg);
+    }
+
+    .demo-arrow:hover {
+      border-color: var(--accent);
+      box-shadow: 0 10px 26px rgba(19, 103, 167, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .demo-arrow:disabled {
+      opacity: 0.35;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .demo-card {
+      scroll-snap-align: start;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--soft);
+    }
+
+    .demo-card video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #000000;
+    }
+
+    .demo-card p {
+      margin: 0;
+      padding: 9px 11px 10px;
+      color: var(--muted);
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.3;
+    }
+
+    .bibtex {
+      overflow-x: auto;
+      margin: 18px 0 0;
+      padding: 16px;
+      border-radius: 8px;
+      background: #f6f8fa;
+      color: #24292f;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      font-size: 14px;
+      line-height: 1.45;
+      white-space: pre;
+    }
+
+    footer {
+      padding: 28px 0 48px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        font-size: 18px;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .grid,
+      .results {
+        grid-template-columns: 1fr;
+      }
+
+      .task-demo-header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .demo-carousel {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 8px;
+      }
+
+      .result-carousel {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 8px;
+      }
+
+      .demo-arrow {
+        width: 38px;
+        height: 38px;
+      }
+
+      .demo-arrow::before {
+        width: 10px;
+        height: 10px;
+        border-width: 2px;
+      }
+
+      .figure {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <h1 class="title">GeoAdapt: Few-shot Peg Insertion Adaptation through Aligned Geometric Observations</h1>
+      <p class="subtitle">A framework for adapting contact-rich insertion policies to unseen plug-socket geometries with challenging rotational alignment.</p>
+      <p class="authors">Anonymous Authors</p>
+      <p class="affiliation">Submitted to the 10th Conference on Robot Learning (CoRL 2026)</p>
+
+      <div class="links">
+        <a class="button" href="resources/GeoAdapt_Anonymous.pdf">Paper</a>
+        <a class="button" href="">Code Coming Soon</a>
+        <a class="button" href="#video">Video</a>
+        <a class="button" href="#real-world-videos">Real-world Videos</a>
+        <a class="button" href="#task-demos">Simulation Rollouts</a>
+      </div>
+
+      <!-- <p class="release-note">Please do not re-share this URL yet. We will release it soon.</p> -->
+    </header>
+
+    <section id="abstract">
+      <h2>Abstract</h2>
+      <div class="abstract">
+        <p>
+          Robotic insertion tasks require precise geometric alignment despite severe occlusion and contact-rich interactions. Although recent learning-based insertion methods have achieved strong performance on standard peg insertion tasks, they often struggle to adapt to unseen insertion geometries that require precise rotational alignment.
+        </p>
+        <p>
+          We present <strong>GeoAdapt</strong>, a framework for few-shot insertion adaptation based on procedurally generated insertion geometries and aligned geometric observations. GeoAdapt combines a diverse plug-socket generation pipeline, an <strong>Aligned Geometric Observation Space (AGOS)</strong> that preserves rotational alignment information under occlusion, and force-conditioned diffusion policy learning with recovery-oriented demonstrations. Through simulation and real-world experiments, GeoAdapt demonstrates strong zero-shot generalization and few-shot adaptation to unseen insertion geometries.
+        </p>
+      </div>
+    </section>
+
+    <section id="video">
+      <h2>Presentation Video</h2>
+      <p class="lead">
+      </p>
+      <div class="video-wrap">
+        <video autoplay muted playsinline controls>
+          <source src="resources/video/CoRL_Video.mp4" type="video/mp4">
+        </video>
+        <!-- <p class="caption">Placeholder video. Replace with the GeoAdapt presentation video when ready.</p> -->
+      </div>
+    </section>
+
+    <section id="overview">
+      <h2>Method Overview</h2>
+      <p class="lead">
+        GeoAdapt increases geometric diversity at the insertion interface, preserves plug-socket alignment through AGOS, and uses wrist depth, aligned geometric depth observations, and end-effector force feedback to predict corrective insertion actions.
+      </p>
+      <div class="figure">
+        <img src="resources/image/overview.png" alt="GeoAdapt method overview">
+        <p class="caption">GeoAdapt system overview. Procedurally generated plug-socket geometries are used for pretraining; AGOS aligns virtual plug and socket depth observations; wrist depth, aligned geometry, and force feedback condition a diffusion policy for few-shot insertion adaptation.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Procedural Geometries</h3>
+          <p>Plug-socket interfaces are generated from randomized primitive shapes, producing asymmetric geometries with diverse rotational alignment constraints.</p>
+        </article>
+        <article class="card">
+          <h3>AGOS</h3>
+          <p>Plug and socket depth observations are projected into a shared virtual frame so relative alignment remains observable even when the wrist view is occluded.</p>
+        </article>
+        <article class="card">
+          <h3>Force-conditioned Policy</h3>
+          <p>A diffusion policy conditions on wrist depth, AGOS depth, and residual end-effector force to learn insertion and recovery behaviors.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="dataset">
+      <h2>Procedural Insertion Dataset</h2>
+      <p class="lead">
+        GeoAdapt procedurally constructs insertion interfaces from circles, ellipses, rectangles, rounded rectangles, and multi-part layouts. These generated assets expand beyond regular peg-in-hole tasks and expose the policy to more varied contact and rotational alignment behavior.
+      </p>
+      <div class="figure">
+        <img src="resources/image/procedural_shapes.png" alt="Procedurally generated insertion interface geometries">
+        <p class="caption">Examples of procedurally generated insertion interface geometries. Randomized primitive composition creates diverse asymmetric profiles with varied rotational alignment constraints.</p>
+      </div>
+    </section>
+
+    <section id="experiments">
+      <h2>Experiments</h2>
+      <p class="lead">
+        We compare GeoAdapt, GeoAdapt w/o AGOS, and GeoAdapt-Automate across simulation and real-world insertion experiments on unseen geometries ordered by increasing rotational alignment difficulty.
+      </p>
+
+      <div class="results">
+        <div class="metric">
+          <strong>69.5%</strong>
+          <span>Average adapted simulation success on eight unseen geometries</span>
+        </div>
+        <div class="metric">
+          <strong>48.2%</strong>
+          <span>Average zero-shot simulation success before task-specific adaptation</span>
+        </div>
+        <div class="metric">
+          <strong>10.7/15</strong>
+          <span>Average real-world success across three 3D-printed tasks</span>
+        </div>
+      </div>
+
+      <div class="result-figures" data-result-carousel>
+        <div class="result-tabs" role="tablist" aria-label="Experiment result tables">
+          <button class="result-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="result-stage" id="result-tab-adaptation">Adaptation</button>
+          <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="result-stage" id="result-tab-zero-shot">Zero-shot</button>
+          <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="result-stage" id="result-tab-real-world">Real-world</button>
+        </div>
+
+        <div class="result-carousel">
+          <button class="demo-arrow previous" type="button" aria-label="Previous result table"></button>
+          <div class="result-stage" id="result-stage" role="tabpanel" aria-live="polite" aria-labelledby="result-tab-adaptation">
+            <div class="figure narrow">
+              <img class="result-image" src="resources/image/adaptation_sim_results.png" alt="Few-shot adaptation success rates on unseen simulation geometries">
+              <p class="caption result-caption">Simulation Results 1: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate.</p>
+            </div>
+          </div>
+          <button class="demo-arrow next" type="button" aria-label="Next result table"></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="real-world-videos">
+      <h2>Real-world Experiment Videos</h2>
+      <p class="lead">
+        Browse successful GeoAdapt rollouts and failure rollouts from GeoAdapt, GeoAdapt w/o AGOS, and GeoAdapt-Automate for each real-world task.
+      </p>
+
+      <nav class="demo-nav" data-real-task-selector role="tablist" aria-label="Real-world experiment navigation">
+        <button class="result-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="real-task-1">Task 1</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="real-task-2">Task 2</button>
+        <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="real-task-3">Task 3</button>
+      </nav>
+
+      <article class="task-demo real-task-panel is-active" id="real-task-1" data-task-name="Real-world Task 1" role="tabpanel">
+        <div class="task-demo-header"><h3>Real-world Task 1</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3">
+          <h4>Successful Rollouts</h4>
+          <div class="demo-strip" aria-label="Real-world Task 1 successful rollout videos"></div>
+        </div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3">
+          <h4>Failure Rollouts</h4>
+          <div class="demo-strip" aria-label="Real-world Task 1 failure rollout videos"></div>
+        </div>
+      </article>
+
+      <article class="task-demo real-task-panel" id="real-task-2" data-task-name="Real-world Task 2" role="tabpanel" hidden>
+        <div class="task-demo-header"><h3>Real-world Task 2</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3">
+          <h4>Successful Rollouts</h4>
+          <div class="demo-strip" aria-label="Real-world Task 2 successful rollout videos"></div>
+        </div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3">
+          <h4>Failure Rollouts</h4>
+          <div class="demo-strip" aria-label="Real-world Task 2 failure rollout videos"></div>
+        </div>
+      </article>
+
+      <article class="task-demo real-task-panel" id="real-task-3" data-task-name="Real-world Task 3" role="tabpanel" hidden>
+        <div class="task-demo-header"><h3>Real-world Task 3</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3">
+          <h4>Successful Rollouts</h4>
+          <div class="demo-strip" aria-label="Real-world Task 3 successful rollout videos"></div>
+        </div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3">
+          <h4>Failure Rollouts</h4>
+          <div class="demo-strip" aria-label="Real-world Task 3 failure rollout videos"></div>
+        </div>
+      </article>
+    </section>
+
+    <section id="task-demos">
+      <h2>Simulation Experiments Rollout Videos</h2>
+      <p class="lead">
+        Browse successful GeoAdapt rollouts and failure rollouts from GeoAdapt, GeoAdapt w/o AGOS, and GeoAdapt-Automate for each unseen simulation task.
+      </p>
+
+      <nav class="demo-nav" aria-label="Simulation rollout navigation">
+        <a href="#task-1">Task 1</a>
+        <a href="#task-2">Task 2</a>
+        <a href="#task-3">Task 3</a>
+        <a href="#task-4">Task 4</a>
+        <a href="#task-5">Task 5</a>
+        <a href="#task-6">Task 6</a>
+        <a href="#task-7">Task 7</a>
+        <a href="#task-8">Task 8</a>
+      </nav>
+
+      <article class="task-demo" id="task-1" data-task-name="Task 1">
+        <div class="task-demo-header"><h3>Task 1</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 1 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
+      </article>
+
+      <article class="task-demo" id="task-2" data-task-name="Task 2">
+        <div class="task-demo-header"><h3>Task 2</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
+      </article>
+
+      <article class="task-demo" id="task-3" data-task-name="Task 3">
+        <div class="task-demo-header"><h3>Task 3</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
+      </article>
+
+      <article class="task-demo" id="task-4" data-task-name="Task 4">
+        <div class="task-demo-header"><h3>Task 4</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 4 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 4 failure rollout videos"></div></div>
+      </article>
+
+      <article class="task-demo" id="task-5" data-task-name="Task 5">
+        <div class="task-demo-header"><h3>Task 5</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 5 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
+      </article>
+
+      <article class="task-demo" id="task-6" data-task-name="Task 6">
+        <div class="task-demo-header"><h3>Task 6</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 6 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 6 failure rollout videos"></div></div>
+      </article>
+
+      <article class="task-demo" id="task-7" data-task-name="Task 7">
+        <div class="task-demo-header"><h3>Task 7</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 7 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 7 failure rollout videos"></div></div>
+      </article>
+
+      <article class="task-demo" id="task-8" data-task-name="Task 8">
+        <div class="task-demo-header"><h3>Task 8</h3></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="3"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 8 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt-Automate" data-count="3"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 8 failure rollout videos"></div></div>
+      </article>
+    </section>
+
+    <section id="citation">
+      <h2>Citation</h2>
+      <p class="lead">Citation information will be updated after release.</p>
+      <pre class="bibtex">@inproceedings{geoadapt2026,
+  title  = {GeoAdapt: Few-shot Peg Insertion Adaptation through Aligned Geometric Observations},
+  author = {Anonymous Authors},
+  booktitle = {Conference on Robot Learning},
+  year   = {2026}
+}</pre>
+    </section>
+  </main>
+
+  <footer>
+    This page is adapted from a previous project template. Images and video are temporary placeholders.
+  </footer>
+
+  <script>
+    document.querySelectorAll("[data-result-carousel]").forEach((resultCarousel) => {
+      const tabs = Array.from(resultCarousel.querySelectorAll(".result-tab"));
+      const stage = resultCarousel.querySelector(".result-stage");
+      const image = resultCarousel.querySelector(".result-image");
+      const caption = resultCarousel.querySelector(".result-caption");
+      const previousButton = resultCarousel.querySelector(".demo-arrow.previous");
+      const nextButton = resultCarousel.querySelector(".demo-arrow.next");
+      const results = [
+        {
+          src: "resources/image/adaptation_sim_results.png",
+          alt: "Few-shot adaptation success rates on unseen simulation geometries",
+          caption: "Simulation Results 1: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate."
+        },
+        {
+          src: "resources/image/zero_shot_results.png",
+          alt: "Zero-shot success rates on unseen simulation geometries",
+          caption: "Simulation Results 2: Zero-shot success rates before task-specific adaptation. GeoAdapt improves generalization to unseen insertion geometries compared with GeoAdapt w/o AGOS and GeoAdapt-Automate."
+        },
+        {
+          src: "resources/image/real_world_adaptation_results.png",
+          alt: "Real-world adaptation success rates on three unseen insertion tasks",
+          caption: "Real-world Results: Real-world adaptation success rates over three 3D-printed unseen insertion tasks. GeoAdapt is compared with GeoAdapt w/o AGOS and GeoAdapt-Automate across 15 trials per task."
+        }
+      ];
+      let activeIndex = 0;
+
+      function showResult(index) {
+        activeIndex = (index + results.length) % results.length;
+        const activeResult = results[activeIndex];
+
+        tabs.forEach((tab, tabIndex) => {
+          const isActive = tabIndex === activeIndex;
+          tab.classList.toggle("is-active", isActive);
+          tab.setAttribute("aria-selected", String(isActive));
+        });
+
+        image.src = activeResult.src;
+        image.alt = activeResult.alt;
+        caption.textContent = activeResult.caption;
+        stage.setAttribute("aria-labelledby", tabs[activeIndex].id);
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => showResult(index));
+      });
+
+      previousButton.addEventListener("click", () => showResult(activeIndex - 1));
+      nextButton.addEventListener("click", () => showResult(activeIndex + 1));
+      showResult(activeIndex);
+    });
+
+    document.querySelectorAll("[data-real-task-selector]").forEach((taskSelector) => {
+      const buttons = Array.from(taskSelector.querySelectorAll("button"));
+      const panels = buttons.map((button) => document.getElementById(button.getAttribute("aria-controls")));
+
+      function showTask(index) {
+        buttons.forEach((button, buttonIndex) => {
+          const isActive = buttonIndex === index;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-selected", String(isActive));
+        });
+
+        panels.forEach((panel, panelIndex) => {
+          if (!panel) {
+            return;
+          }
+
+          const isActive = panelIndex === index;
+          panel.classList.toggle("is-active", isActive);
+          panel.hidden = !isActive;
+        });
+
+        window.dispatchEvent(new Event("resize"));
+      }
+
+      buttons.forEach((button, index) => {
+        button.addEventListener("click", () => showTask(index));
+      });
+    });
+
+    document.querySelectorAll("[data-rollout-group]").forEach((rolloutGroup) => {
+      const taskSection = rolloutGroup.closest(".task-demo");
+      const taskName = taskSection.dataset.taskName;
+      const outcome = rolloutGroup.dataset.outcome;
+      const models = rolloutGroup.dataset.models.split("|");
+      const count = Number(rolloutGroup.dataset.count) || 1;
+      const videoSrc = rolloutGroup.dataset.videoSrc || "resources/video/demo.mp4";
+      const strip = rolloutGroup.querySelector(".demo-strip");
+      const carousel = document.createElement("div");
+      const previousButton = document.createElement("button");
+      const nextButton = document.createElement("button");
+
+      function renderRollouts(model) {
+        strip.replaceChildren();
+        strip.scrollLeft = 0;
+
+        for (let index = 1; index <= count; index += 1) {
+          const card = document.createElement("div");
+          const video = document.createElement("video");
+          const source = document.createElement("source");
+          const caption = document.createElement("p");
+
+          card.className = "demo-card";
+          video.muted = true;
+          video.playsInline = true;
+          video.controls = true;
+          video.preload = "metadata";
+          source.src = videoSrc;
+          source.type = "video/mp4";
+          caption.textContent = `${taskName} - ${outcome} - ${model} - Rollout ${index}`;
+
+          video.append(source);
+          card.append(video, caption);
+          strip.append(card);
+        }
+
+        requestAnimationFrame(updateButtons);
+      }
+
+      if (outcome === "Failure" && models.length > 1) {
+        const tabs = document.createElement("div");
+        const heading = rolloutGroup.querySelector("h4");
+
+        tabs.className = "baseline-tabs";
+        tabs.setAttribute("role", "tablist");
+        tabs.setAttribute("aria-label", `${taskName} failure rollout model selection`);
+
+        models.forEach((model, modelIndex) => {
+          const tab = document.createElement("button");
+          const isActive = modelIndex === 0;
+
+          tab.className = "result-tab";
+          tab.type = "button";
+          tab.textContent = model;
+          tab.setAttribute("role", "tab");
+          tab.setAttribute("aria-selected", String(isActive));
+          tab.classList.toggle("is-active", isActive);
+
+          tab.addEventListener("click", () => {
+            tabs.querySelectorAll(".result-tab").forEach((button) => {
+              const buttonIsActive = button === tab;
+              button.classList.toggle("is-active", buttonIsActive);
+              button.setAttribute("aria-selected", String(buttonIsActive));
+            });
+
+            renderRollouts(model);
+          });
+
+          tabs.append(tab);
+        });
+
+        heading.after(tabs);
+      }
+
+      carousel.className = "demo-carousel";
+      previousButton.className = "demo-arrow previous";
+      nextButton.className = "demo-arrow next";
+      previousButton.type = "button";
+      nextButton.type = "button";
+      previousButton.setAttribute("aria-label", `Previous ${taskName} ${outcome.toLowerCase()} rollout`);
+      nextButton.setAttribute("aria-label", `Next ${taskName} ${outcome.toLowerCase()} rollout`);
+
+      strip.before(carousel);
+      carousel.append(previousButton, strip, nextButton);
+
+      function cardStep() {
+        const firstCard = strip.querySelector(".demo-card");
+        if (!firstCard) {
+          return strip.clientWidth;
+        }
+
+        const stripStyles = window.getComputedStyle(strip);
+        const gap = parseFloat(stripStyles.columnGap) || 0;
+        return firstCard.getBoundingClientRect().width + gap;
+      }
+
+      function updateButtons() {
+        previousButton.disabled = strip.scrollLeft <= 1;
+        nextButton.disabled = strip.scrollLeft + strip.clientWidth >= strip.scrollWidth - 1;
+      }
+
+      previousButton.addEventListener("click", () => {
+        strip.scrollBy({ left: -cardStep(), behavior: "smooth" });
+      });
+
+      nextButton.addEventListener("click", () => {
+        strip.scrollBy({ left: cardStep(), behavior: "smooth" });
+      });
+
+      strip.addEventListener("scroll", updateButtons);
+      window.addEventListener("resize", updateButtons);
+      renderRollouts(models[0]);
+    });
+  </script>
+</body>
+</html>
