@@ -441,6 +441,18 @@
       line-height: 1.3;
     }
 
+    .demo-empty {
+      margin: 0;
+      padding: 18px 14px;
+      border: 1px dashed var(--line);
+      border-radius: 8px;
+      color: var(--muted);
+      font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.4;
+      align-self: start;
+    }
+
     .bibtex {
       overflow-x: auto;
       margin: 18px 0 0;
@@ -585,7 +597,7 @@
 
       <div class="results">
         <div class="metric">
-          <strong>69.5%</strong>
+          <strong>94.2%</strong>
           <span>Average adapted simulation success on eight unseen geometries</span>
         </div>
         <div class="metric">
@@ -608,7 +620,7 @@
         <div class="result-carousel">
           <div class="result-stage" id="result-stage" role="tabpanel" aria-live="polite" aria-labelledby="result-tab-adaptation">
             <div class="figure narrow">
-              <img class="result-image" src="resources/image/adaptation_sim_results.png" alt="Few-shot adaptation success rates on unseen simulation geometries">
+              <img class="result-image" src="resources/image/adaptation_sim_results.png?v=2" alt="Few-shot adaptation success rates on unseen simulation geometries">
               <p class="caption result-caption">Simulation Results 1: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate.</p>
             </div>
           </div>
@@ -668,7 +680,7 @@
     <section id="task-demos">
       <h2>Simulation Experiments Rollout Videos</h2>
       <p class="lead">
-        Browse successful GeoAdapt rollouts and failure rollouts from GeoAdapt, GeoAdapt w/o AGOS, and GeoAdapt-Automate for each unseen simulation task.
+        Browse successful and failure rollouts of GeoAdapt, its ablations (GeoAdapt w/o AGOS, GeoAdapt w/o Augmentation, GeoAdapt-Automate) and the learned baselines (InsertionNet Relational, InsertionNet Delta, π0.5) for each unseen simulation task. Where a method never produced an outcome in the recorded rollouts, the strip says so instead of showing a clip.
       </p>
 
       <nav class="demo-nav" data-sim-task-selector role="tablist" aria-label="Simulation rollout navigation">
@@ -684,50 +696,50 @@
 
       <article class="task-demo sim-task-panel is-active" id="task-1" data-task-name="Task 1" role="tabpanel">
         <div class="task-demo-header"><h3>Task 1</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_1/successful/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 1 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_1/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_1/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_1/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_1/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_1/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_1/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_1/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_1/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_1/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_1/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_1/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 1 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_1/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_1/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_1/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_1/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_1/failure/insertionnet_delta/failure_{index}.mp4" data-video-sources="GeoAdapt w/o Augmentation=|π0.5="><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-2" data-task-name="Task 2" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 2</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_2/successful/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_2/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_2/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_2/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_2/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_2/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_2/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_2/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_2/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_2/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_2/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_2/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_2/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_2/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_2/failure/pi05/failure_{index}.mp4" data-video-sources="GeoAdapt w/o Augmentation="><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-3" data-task-name="Task 3" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 3</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_3/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-sources="GeoAdapt=resources/video/sim/task_3/failure/geoadapt/failure_1.mp4,resources/video/sim/task_3/failure/geoadapt/failure2.mp4" data-video-templates="GeoAdapt w/o AGOS=resources/video/sim/task_3/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_3/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_3/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_3/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_3/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_3/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_3/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_3/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_3/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_3/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 3 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_3/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_3/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_3/failure/geoadapt_wo_augmentation/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_3/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_3/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_3/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_3/failure/pi05/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 3 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-4" data-task-name="Task 4" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 4</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_4/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 4 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_4/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_4/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_4/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_4/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 4 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_4/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_4/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_4/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_4/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_4/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_4/successful/pi05/success_{index}.mp4" data-video-sources="InsertionNet Relational="><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 4 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_4/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_4/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_4/failure/geoadapt_wo_augmentation/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_4/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_4/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_4/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_4/failure/pi05/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 4 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-5" data-task-name="Task 5" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 5</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_5/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 5 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_5/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_5/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_5/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_5/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_5/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_5/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_5/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_5/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_5/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_5/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_5/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 5 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_5/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_5/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_5/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_5/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_5/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_5/failure/pi05/failure_{index}.mp4" data-video-sources="GeoAdapt w/o Augmentation=resources/video/sim/task_5/failure/geoadapt_wo_augmentation/failure_1.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-6" data-task-name="Task 6" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 6</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_6/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 6 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_6/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_6/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_6/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_6/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 6 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_6/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_6/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_6/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_6/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_6/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_6/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_6/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 6 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_6/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_6/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_6/failure/geoadapt_wo_augmentation/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_6/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_6/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_6/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_6/failure/pi05/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 6 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-7" data-task-name="Task 7" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 7</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_7/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 7 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_7/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_7/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_7/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_7/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 7 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_7/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_7/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_7/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_7/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_7/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_7/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_7/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 7 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_7/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_7/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_7/failure/geoadapt_wo_augmentation/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_7/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_7/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_7/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_7/failure/pi05/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 7 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-8" data-task-name="Task 8" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 8</h3></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt" data-count="2" data-video-template="resources/video/sim/task_8/successful/geoadapt/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 8 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Force|GeoAdapt-Automate" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_8/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_8/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Force=resources/video/sim/task_8/failure/geoadapt_wo_force/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_8/failure/geoadapt_automate/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 8 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_8/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_8/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_8/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_8/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_8/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_8/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_8/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 8 successful rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_8/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_8/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_8/failure/geoadapt_wo_augmentation/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_8/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_8/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_8/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_8/failure/pi05/failure_{index}.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 8 failure rollout videos"></div></div>
       </article>
     </section>
 
@@ -755,7 +767,7 @@
       const caption = resultCarousel.querySelector(".result-caption");
       const results = [
         {
-          src: "resources/image/adaptation_sim_results.png",
+          src: "resources/image/adaptation_sim_results.png?v=2",
           alt: "Few-shot adaptation success rates on unseen simulation geometries",
           caption: "Simulation Results 1: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate."
         },
@@ -847,7 +859,7 @@
           .filter(Boolean)
           .map((entry) => {
             const separatorIndex = entry.indexOf("=");
-            return [entry.slice(0, separatorIndex), entry.slice(separatorIndex + 1).split(",")];
+            return [entry.slice(0, separatorIndex), entry.slice(separatorIndex + 1).split(",").filter(Boolean)];
           })
       );
       const playbackRate = Number(rolloutGroup.dataset.playbackRate || rolloutGroup.closest("[data-playback-rate]")?.dataset.playbackRate) || 1;
@@ -858,8 +870,19 @@
         strip.scrollLeft = 0;
         const activeTemplate = videoTemplates.get(model) || videoTemplate;
         const activeSources = videoSources.get(model);
+        const total = activeSources ? activeSources.length : count;
 
-        for (let index = 1; index <= count; index += 1) {
+        if (total === 0) {
+          const note = document.createElement("p");
+          note.className = "demo-empty";
+          note.textContent = outcome === "Failure"
+            ? `No failure rollouts: ${model} succeeded in every recorded attempt on ${taskName}.`
+            : `No successful rollouts: ${model} did not succeed in any recorded attempt on ${taskName}.`;
+          strip.append(note);
+          return;
+        }
+
+        for (let index = 1; index <= total; index += 1) {
           const card = document.createElement("div");
           const video = document.createElement("video");
           const source = document.createElement("source");
@@ -885,13 +908,13 @@
         }
       }
 
-      if (outcome === "Failure" && models.length > 1) {
+      if (models.length > 1) {
         const tabs = document.createElement("div");
         const heading = rolloutGroup.querySelector("h4");
 
         tabs.className = "baseline-tabs";
         tabs.setAttribute("role", "tablist");
-        tabs.setAttribute("aria-label", `${taskName} failure rollout model selection`);
+        tabs.setAttribute("aria-label", `${taskName} ${outcome.toLowerCase()} rollout model selection`);
 
         models.forEach((model, modelIndex) => {
           const tab = document.createElement("button");
