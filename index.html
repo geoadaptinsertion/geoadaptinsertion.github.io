@@ -289,9 +289,10 @@
 
     .results {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
-      margin: 20px 0;
+      max-width: 880px;
+      margin: 20px auto;
       font-family: "Source Sans 3", Helvetica, Arial, sans-serif;
     }
 
@@ -524,7 +525,7 @@
           Robotic insertion tasks require precise geometric alignment despite severe occlusion and contact-rich interactions. Although recent learning-based insertion methods have achieved strong performance on standard peg insertion tasks, they often struggle to adapt to unseen insertion geometries that require precise rotational alignment.
         </p>
         <p>
-          We present <strong>GeoAdapt</strong>, a framework for few-shot insertion adaptation based on procedurally generated insertion geometries and aligned geometric observations. GeoAdapt combines a diverse plug-socket generation pipeline, an <strong>Aligned Geometric Observation Space (AGOS)</strong> that preserves rotational alignment information under occlusion, and force-conditioned diffusion policy learning with recovery-oriented demonstrations. Through simulation and real-world experiments, GeoAdapt demonstrates strong zero-shot generalization and few-shot adaptation to unseen insertion geometries.
+          We present <strong>GeoAdapt</strong>, a framework for few-shot insertion adaptation based on procedurally generated insertion geometries and aligned geometric observations. GeoAdapt combines a diverse plug-socket generation pipeline, an <strong>Aligned Geometric Observation Space (AGOS)</strong> that preserves rotational alignment information under occlusion, and force-conditioned diffusion policy learning with recovery-oriented demonstrations. Through simulation and real-world experiments, GeoAdapt demonstrates strong few-shot adaptation to unseen insertion geometries.
         </p>
       </div>
     </section>
@@ -601,10 +602,6 @@
           <span>Average adapted simulation success on eight unseen geometries</span>
         </div>
         <div class="metric">
-          <strong>48.2%</strong>
-          <span>Average zero-shot simulation success before task-specific adaptation</span>
-        </div>
-        <div class="metric">
           <strong>10.7/15</strong>
           <span>Average real-world success across three 3D-printed tasks</span>
         </div>
@@ -613,7 +610,6 @@
       <div class="result-figures" data-result-carousel>
         <div class="result-tabs" role="tablist" aria-label="Experiment result tables">
           <button class="result-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="result-stage" id="result-tab-adaptation">Adaptation</button>
-          <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="result-stage" id="result-tab-zero-shot">Zero-shot</button>
           <button class="result-tab" type="button" role="tab" aria-selected="false" aria-controls="result-stage" id="result-tab-real-world">Real-world</button>
         </div>
 
@@ -621,7 +617,7 @@
           <div class="result-stage" id="result-stage" role="tabpanel" aria-live="polite" aria-labelledby="result-tab-adaptation">
             <div class="figure narrow">
               <img class="result-image" src="resources/image/adaptation_sim_results.png?v=2" alt="Few-shot adaptation success rates on unseen simulation geometries">
-              <p class="caption result-caption">Simulation Results 1: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate.</p>
+              <p class="caption result-caption">Simulation Results: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate.</p>
             </div>
           </div>
         </div>
@@ -697,13 +693,13 @@
       <article class="task-demo sim-task-panel is-active" id="task-1" data-task-name="Task 1" role="tabpanel">
         <div class="task-demo-header"><h3>Task 1</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_1/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_1/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_1/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_1/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_1/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_1/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_1/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 1 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_1/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_1/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_1/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_1/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_1/failure/insertionnet_delta/failure_{index}.mp4" data-video-sources="GeoAdapt w/o Augmentation=|π0.5="><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt w/o AGOS=resources/video/sim/task_1/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_1/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_1/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_1/failure/insertionnet_delta/failure_{index}.mp4" data-video-sources="GeoAdapt=|GeoAdapt w/o Augmentation=|π0.5="><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 1 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-2" data-task-name="Task 2" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 2</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_2/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_2/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_2/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_2/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_2/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_2/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 2 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_2/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_2/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_2/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_2/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_2/failure/pi05/failure_{index}.mp4" data-video-sources="GeoAdapt w/o Augmentation="><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt w/o AGOS=resources/video/sim/task_2/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_2/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_2/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_2/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_2/failure/pi05/failure_{index}.mp4" data-video-sources="GeoAdapt=|GeoAdapt w/o Augmentation="><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 2 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-3" data-task-name="Task 3" role="tabpanel" hidden>
@@ -721,7 +717,7 @@
       <article class="task-demo sim-task-panel" id="task-5" data-task-name="Task 5" role="tabpanel" hidden>
         <div class="task-demo-header"><h3>Task 5</h3></div>
         <div class="rollout-group" data-rollout-group data-outcome="Successful" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_5/successful/geoadapt/success_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_5/successful/geoadapt_wo_agos/success_{index}.mp4|GeoAdapt w/o Augmentation=resources/video/sim/task_5/successful/geoadapt_wo_augmentation/success_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_5/successful/geoadapt_automate/success_{index}.mp4|InsertionNet Relational=resources/video/sim/task_5/successful/insertionnet_relational/success_{index}.mp4|InsertionNet Delta=resources/video/sim/task_5/successful/insertionnet_delta/success_{index}.mp4|π0.5=resources/video/sim/task_5/successful/pi05/success_{index}.mp4"><h4>Successful Rollouts</h4><div class="demo-strip" aria-label="Task 5 successful rollout videos"></div></div>
-        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt=resources/video/sim/task_5/failure/geoadapt/failure_{index}.mp4|GeoAdapt w/o AGOS=resources/video/sim/task_5/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_5/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_5/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_5/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_5/failure/pi05/failure_{index}.mp4" data-video-sources="GeoAdapt w/o Augmentation=resources/video/sim/task_5/failure/geoadapt_wo_augmentation/failure_1.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
+        <div class="rollout-group" data-rollout-group data-outcome="Failure" data-models="GeoAdapt|GeoAdapt w/o AGOS|GeoAdapt w/o Augmentation|GeoAdapt-Automate|InsertionNet Relational|InsertionNet Delta|π0.5" data-count="2" data-video-templates="GeoAdapt w/o AGOS=resources/video/sim/task_5/failure/geoadapt_wo_agos/failure_{index}.mp4|GeoAdapt-Automate=resources/video/sim/task_5/failure/geoadapt_automate/failure_{index}.mp4|InsertionNet Relational=resources/video/sim/task_5/failure/insertionnet_relational/failure_{index}.mp4|InsertionNet Delta=resources/video/sim/task_5/failure/insertionnet_delta/failure_{index}.mp4|π0.5=resources/video/sim/task_5/failure/pi05/failure_{index}.mp4" data-video-sources="GeoAdapt=|GeoAdapt w/o Augmentation=resources/video/sim/task_5/failure/geoadapt_wo_augmentation/failure_1.mp4"><h4>Failure Rollouts</h4><div class="demo-strip" aria-label="Task 5 failure rollout videos"></div></div>
       </article>
 
       <article class="task-demo sim-task-panel" id="task-6" data-task-name="Task 6" role="tabpanel" hidden>
@@ -743,16 +739,6 @@
       </article>
     </section>
 
-    <section id="citation">
-      <h2>Citation</h2>
-      <p class="lead">Citation information will be updated after release.</p>
-      <pre class="bibtex">@inproceedings{geoadapt2026,
-  title  = {GeoAdapt: Few-shot Peg Insertion Adaptation through Aligned Geometric Observations},
-  author = {Anonymous Authors},
-  booktitle = {Conference on Robot Learning},
-  year   = {2026}
-}</pre>
-    </section>
   </main>
 
   <footer>
@@ -769,12 +755,7 @@
         {
           src: "resources/image/adaptation_sim_results.png?v=2",
           alt: "Few-shot adaptation success rates on unseen simulation geometries",
-          caption: "Simulation Results 1: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate."
-        },
-        {
-          src: "resources/image/zero_shot_results.png",
-          alt: "Zero-shot success rates on unseen simulation geometries",
-          caption: "Simulation Results 2: Zero-shot success rates before task-specific adaptation. GeoAdapt improves generalization to unseen insertion geometries compared with GeoAdapt w/o AGOS and GeoAdapt-Automate."
+          caption: "Simulation Results: Few-shot adaptation success rates on eight unseen geometries. GeoAdapt achieves the highest average success rate across tasks compared with GeoAdapt w/o AGOS and GeoAdapt-Automate."
         },
         {
           src: "resources/image/real_world_adaptation_results.png",
